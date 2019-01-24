@@ -7,12 +7,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
-- Add script to extract the changelog of a specific project version
-- Create docker image
-
 ### Fixed
 ### Changed
 ### Removed
 ### Deprecated
 ### Security
+
+## [v0.1.0 - 24-01-2018]
+
+### Added
+- Add script to extract the changelog of a specific project version
+- Create docker image
 
