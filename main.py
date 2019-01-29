@@ -16,7 +16,7 @@ def convert_changelog_to_json(file_name):
     return renderer.stringify_dict(nested)
 
 
-def release_dict_to_markdown(release_dict, printable=False):
+def release_dict_to_markdown(release_dict, literal_newline=False):
     lines = ['# CHANGELOG', '']
     for key, values in release_dict.items():
         lines.append(f'## {key}')
@@ -24,7 +24,7 @@ def release_dict_to_markdown(release_dict, printable=False):
             lines.append(f' - {value}')
         lines.append('')
 
-    sep = '\n' if printable else '<br />'
+    sep = r'\n' if literal_newline else '\n'
 
     return sep.join(lines)
 
@@ -42,11 +42,11 @@ if __name__ == '__main__':
                         help='Project version to be extracted (default: Unreleased)')
     parser.add_argument('--filename', default='./CHANGELOG.md',
                         help='Path to CHANGELOG file')
-    parser.add_argument('--printable', action='store_true', help='If set use \\n line separator')
+    parser.add_argument('--literal-newline', action='store_true', help='If set use literal line separator')
 
     args = parser.parse_args()
 
     changelog_dict, = list(convert_changelog_to_json(args.filename).values())
     release_dict = extract_release_by_name(changelog_dict, args.project_version)
-    print(release_dict_to_markdown(release_dict, args.printable))
+    print(release_dict_to_markdown(release_dict, args.literal_newline))
 
